@@ -1,0 +1,103 @@
+{
+  "name": "understand-anything-desktop",
+  "version": "0.1.1",
+  "private": true,
+  "type": "module",
+  "description": "代码知识图谱 · OpenAI Compatible 模型服务",
+  "author": "Understand Anything Desktop contributors",
+  "license": "MIT",
+  "main": "desktop/main.mjs",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "start": "electron .",
+    "dev": "npm run build && electron .",
+    "test": "node --test tests/*.test.mjs",
+    "pack:win": "npm run build && electron-builder --win nsis --x64",
+    "pack:dir": "npm run build && electron-builder --win --x64 --dir"
+  },
+  "dependencies": {
+    "@tree-sitter-grammars/tree-sitter-kotlin": "1.1.0",
+    "@understand-anything/tree-sitter-dart-wasm": "file:vendor/tree-sitter-dart-wasm",
+    "@understand-anything/tree-sitter-swift-wasm": "file:vendor/tree-sitter-swift-wasm",
+    "tree-sitter-c-sharp": "^0.23.1",
+    "tree-sitter-cpp": "^0.23.4",
+    "tree-sitter-go": "^0.25.0",
+    "tree-sitter-java": "^0.23.5",
+    "tree-sitter-javascript": "^0.25.0",
+    "tree-sitter-php": "^0.23.11",
+    "tree-sitter-python": "^0.25.0",
+    "tree-sitter-ruby": "^0.23.1",
+    "tree-sitter-rust": "^0.24.0",
+    "tree-sitter-scala": "^0.24.0",
+    "tree-sitter-typescript": "^0.23.2",
+    "web-tree-sitter": "^0.26.6"
+  },
+  "devDependencies": {
+    "@dagrejs/dagre": "^2.0.4",
+    "@xyflow/react": "^12.0.0",
+    "d3-force": "^3.0.0",
+    "devlop": "^1.1.0",
+    "elkjs": "^0.9.3",
+    "graphology": "^0.25.4",
+    "graphology-communities-louvain": "^2.0.1",
+    "graphology-types": "^0.24.8",
+    "hast-util-to-jsx-runtime": "^2.3.6",
+    "prism-react-renderer": "^2.4.1",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-markdown": "^10.1.0",
+    "remark-gfm": "^4.0.1",
+    "zustand": "^5.0.0",
+    "@tailwindcss/vite": "^4.0.0",
+    "@types/d3-force": "^3.0.10",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@vitejs/plugin-react": "^4.3.0",
+    "@vitest/coverage-v8": "^3.2.4",
+    "tailwindcss": "^4.0.0",
+    "typescript": "^5.7.0",
+    "vite": "^6.4.2",
+    "vitest": "^3.1.0",
+    "fuse.js": "^7.1.0",
+    "ignore": "^7.0.5",
+    "yaml": "^2.8.3",
+    "zod": "^4.3.6",
+    "electron": "^39.0.0",
+    "electron-builder": "^26.0.12",
+    "esbuild": "^0.25.0",
+    "@playwright/test": "^1.56.0"
+  },
+  "build": {
+    "appId": "local.understandanything.desktop",
+    "productName": "Understand Anything Desktop",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "desktop/**/*",
+      "dist-desktop/**/*",
+      "dist-viewer/**/*",
+      "vendor/LICENSE",
+      "THIRD_PARTY_NOTICES.md",
+      "package.json"
+    ],
+    "asarUnpack": [
+      "node_modules/**/*.wasm"
+    ],
+    "npmRebuild": false,
+    "win": {
+      "target": [
+        "nsis"
+      ],
+      "artifactName": "Understand-Anything-Desktop-${version}-Setup.${ext}",
+      "signAndEditExecutable": false
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "deleteAppDataOnUninstall": false
+    }
+  }
+}

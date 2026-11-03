@@ -1,0 +1,61 @@
+# Dependencies, including nested packages
+node_modules/
+.npm/
+.node_repl_history
+
+# Build output and Windows installers
+/dist-desktop/
+/dist-viewer/
+/release/
+dist/
+dist-demo/
+*.tsbuildinfo
+*.tgz
+
+# Test reports and tool caches
+coverage/
+test-results/
+playwright-report/
+playwright/.cache/
+.vite/
+.vitest/
+.cache/
+*.log
+*.log.*
+*.pid
+*.pid.lock
+*.heapsnapshot
+report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+
+# Local analysis data (may contain code and model summaries)
+.ua/
+.understand-anything/
+
+# Local environment and signing credentials
+.env
+.env.*
+!.env.example
+!.env.*.example
+*.local
+*.pem
+*.key
+*.pfx
+*.p12
+*.p8
+*.mobileprovision
+
+# Editor and operating system files
+.idea/
+.vscode/
+*.swp
+*.swo
+*.tmp
+*.temp
+*~
+.DS_Store
+._*
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Keep package-lock.json, vendor source, licenses and vendored *.wasm tracked.

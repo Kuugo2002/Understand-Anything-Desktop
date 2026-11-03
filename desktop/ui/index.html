@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Understand Anything Desktop</title><link rel="stylesheet" href="/style.css"></head>
+<body>
+  <aside class="rail">
+    <div class="brand-icon">U<span>·</span></div>
+    <div class="rail-label">本地工作台</div>
+    <button id="choose" class="rail-button active"><span>▧</span> 打开项目</button>
+    <button id="recent" class="rail-button"><span>↶</span> 最近项目</button>
+    <button id="settings-button" class="rail-button"><span>⚙</span> 模型设置</button>
+    <div class="rail-bottom"><span class="dot"></span> 自定义模型服务<br><small>支持本机 / 局域网 / 远程</small></div>
+  </aside>
+  <main>
+    <header><div><div class="eyebrow">UNDERSTAND ANYTHING / DESKTOP</div><h1>把代码，变成看得懂的地图。</h1></div><button id="connection" class="connection"><span class="dot muted"></span><span id="model-label">未配置模型</span></button></header>
+    <section class="project-bar"><div class="project-icon">⌘</div><div class="project-details"><strong id="project-name">选择一个项目，开始探索</strong><div id="project-path">支持本机代码库与文档目录</div></div><div class="project-actions"><button id="export" disabled>导出图谱</button><button id="structural" disabled>仅解析结构</button><button id="analyze" class="primary" disabled>✦ 模型分析</button><button id="cancel" class="danger" hidden>取消任务</button></div></section>
+    <section id="status-area" aria-live="polite"><div class="status-row"><span id="status-text">就绪 · 所有分析结果保存在项目目录中</span><span id="status-count"></span></div><progress id="progress" max="100" value="0"></progress></section>
+    <div id="notice" class="notice" role="alert" hidden></div>
+    <section class="workspace">
+      <div class="graph-panel"><div class="panel-heading"><span>项目知识图谱</span><span id="graph-count" class="subtle">从结构到理解</span></div>
+        <div id="empty" class="empty"><div class="constellation"><i></i><i></i><i></i><i></i><i></i><b>U</b></div><div class="eyebrow">YOUR CODE. YOUR MACHINE.</div><h2>让复杂的项目，清晰起来。</h2><p>打开本地项目，梳理文件、函数与依赖关系。<br>连接模型，进一步理解代码的职责。</p><button id="empty-choose" class="primary">选择项目目录 →</button><div class="steps"><span>01 选择目录</span><span>02 模型分析</span><span>03 探索图谱</span></div></div>
+        <iframe id="viewer" title="Understand Anything 项目图谱" hidden></iframe>
+      </div>
+      <aside class="chat-panel"><div class="panel-heading"><span>问问这个项目</span><span class="local-tag">AI</span></div><div id="messages" class="messages"><div class="chat-intro"><span>✦</span><h3>从一个问题开始</h3><p>生成图谱后，模型会结合文件与关系摘要，帮助你理解项目。</p><button class="suggestion" data-question="这个项目的入口在哪里？">这个项目的入口在哪里？ ↗</button><button class="suggestion" data-question="主要模块之间如何协作？">主要模块之间如何协作？ ↗</button></div></div><form id="chat-form"><textarea id="question" rows="3" maxlength="6000" placeholder="例如：用户登录的逻辑在哪里？" aria-label="项目问题"></textarea><div class="chat-footer"><small>基于图谱摘要回答</small><button id="ask" class="primary" disabled>发送 ↑</button></div></form></aside>
+    </section>
+    <footer><span>Understand Anything Desktop · 0.1.1</span><span>仅模型服务联网 · 其余功能本地运行</span></footer>
+  </main>
+  <dialog id="settings-dialog"><form id="settings-form"><div class="dialog-top"><div><div class="eyebrow">MODEL CONNECTION</div><h2>连接你的模型服务</h2></div><button type="button" id="close-settings" class="icon-button" aria-label="关闭设置">×</button></div><p class="dialog-description">填写 OpenAI 兼容后端的 IP 或域名地址，支持本机、局域网及远程服务。分析时会将所选代码内容发送到该服务。</p>
+    <label>模型服务<select id="provider"><option value="openai-compatible">OpenAI Compatible</option></select></label>
+    <label>API 地址<input id="base-url" value="http://127.0.0.1:11434/v1" placeholder="http://192.168.1.100:8000/v1" required><small>支持 HTTP / HTTPS，例如 http://192.168.1.100:8000/v1。</small></label>
+    <label>访问密钥 <span class="subtle">（可选）</span><input id="api-key" type="password" autocomplete="off" placeholder="通常留空即可"><small id="key-hint">如服务启用了认证，可在此填写。</small></label>
+    <label class="checkbox"><input id="clear-key" type="checkbox"> 清除已保存的密钥</label>
+    <label>模型<div class="input-row"><input id="model" list="model-list" placeholder="读取模型列表或输入模型名称"><button type="button" id="load-models">读取列表</button></div><datalist id="model-list"></datalist></label>
+    <label>每个文件发送的字符上限<select id="file-limit"><option value="6000">6,000 · 较小上下文</option><option value="12000" selected>12,000 · 默认</option><option value="24000">24,000 · 较大上下文</option><option value="48000">48,000 · 大上下文</option></select><small>超出部分不发送给模型，静态结构仍解析完整文件。</small></label>
+    <div id="settings-status" role="status"></div><div class="dialog-actions"><button type="button" id="test-model">测试模型</button><button type="submit" class="primary">保存设置</button></div>
+  </form></dialog>
+  <script src="/app.js" type="module"></script>
+</body></html>
